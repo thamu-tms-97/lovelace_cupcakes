@@ -1,0 +1,81 @@
+/* css global variables */
+:root {
+    --primary_dark: rgb(194, 9, 250);
+    --primary_medium: rgb(221, 116, 253);
+    --primary_light: rgb(245, 222, 253);
+    --secondary_dark: rgb(67, 73, 240);
+    --secondary_light: rgb(234, 235, 250);
+}
+
+h1 {
+    color: var(--primary_dark);
+}
+
+table,
+th,
+td {
+    border: 2px solid var(--primary_medium);
+    border-collapse: collapse;
+}
+
+tr:nth-child(even) {
+    background-color: var(--primary_light);
+}
+
+.separator {
+    border: 2px solid var(--primary_dark);
+    background-color: var(--secondary_light);
+    padding: 10px;
+    margin: 10px;
+}
+
+#message_area {
+    min-height: 30px;
+}
+
+#ada_lovelace {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+    border: 20px solid var(--primary_medium);
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.total_values {
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+#total_with_tax {
+    font-size: 1.5em;
+    color: var(--secondary_dark);
+}
+
+.cupcake_frosting {
+    border: 1px solid var(--secondary_dark);
+    border-radius: 40px;
+    padding: 0px;
+    margin: 0px;
+    width: 40px;
+    height: 15px;
+}
+
+.cupcake_cake {
+    border: 1px solid var(--secondary_dark);
+    border-radius: 5px;
+    padding: 0px;
+    margin: 0px;
+    width: 40px;
+    height: 30px;
+}
+
+.cupcake_name {
+    padding: 0px;
+    margin: 0px;
+}
+
+.white_cupcake {
+    width: 150px;
+    height: 150px;
+}

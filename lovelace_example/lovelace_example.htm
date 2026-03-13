@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="lovelace.css" />
+        <script type="text/javascript" src="cupcake.js"></script>
+        <script type="text/javascript" src="lovelace.js"></script>
+    </head>
+    <body>
+        <div class="separator">
+            <h1>Lovelace Cupcakes</h1>
+            <!-- STUDENTS SHOULD ADD HTML HERE TO DISPLAY THE TWO WHITE CUPCAKES HERE FOR PART 1 OF THE ASSIGNMENT -->
+            <image
+                id="ada_lovelace"
+                src="images/ada_lovelace.png"
+                alt="Ada Lovelace"
+            />
+        </div>
+        <script>
+            display_cupcakes();
+        </script>
+        <div id="message_area" class="separator">
+            <span id="message"
+                >Select quantity and frosting for the cupcakes you would like to
+                purchase</span
+            >
+            <div id="total" class="total_values"></div>
+            <div id="tax" class="total_values"></div>
+            <div id="total_with_tax" class="total_values"></div>
+        </div>
+        <div class="separator">
+            <button onclick="purchase()">Purchase</button>
+        </div>
+    </body>
+</html>
