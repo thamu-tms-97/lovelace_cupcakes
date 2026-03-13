@@ -13,11 +13,34 @@ function frosting_clear(i) {
     frosting_elem.style.outline = 'none';
 }
 
-/*
- * STUDENTS SHOULD ADD CODE HERE FOR THE PURCHASE FUNCTIONALITY FOR PART 2 OF THE ASSIGNMENT
- */
 function purchase() {
-    console.log('purchase button clicked');
+    let subtotal = 0;
+
+    // Looping through all cupcakes to calculate the subtotal
+    for (let i = 0; i < cupcake_data.length; i++) {
+        const qty = parseInt(document.getElementById('quantity' + i).value);
+
+        frosting_clear(i);
+
+        //Only add to subtotal if quantity is greater than 0
+        if (qty > 0) {
+            subtotal += qty * cupcake_data[i].price;
+        }
+    }
+
+    //Calculating Tax and Final Total
+    const tax = subtotal * tax_percentage;
+    const finalTotal = subtotal + tax;
+
+    //Updating the UI with the final values
+    document.getElementById('total').textContent =
+        `Total: $${subtotal.toFixed(2)}`;
+    document.getElementById('tax').textContent = `Tax: $${tax.toFixed(2)}`;
+    document.getElementById('total_with_tax').textContent =
+        `Total with Tax: $${finalTotal.toFixed(2)}`;
+
+    document.getElementById('message').textContent =
+        'Select quantity and frosting for the cupcakes you would like to purchase';
 }
 
 function make_header(table) {
@@ -32,9 +55,16 @@ function make_header(table) {
     th = document.createElement('th');
     th.textContent = 'Frosting';
     tr.appendChild(th);
-    /*
-     * STUDENTS SHOULD ADD CODE HERE FOR THE PRICE AND QUANTITY COLUMN HEADERS FOR PART 1 OF THE ASSIGNMENT
-     */
+
+    // Adding the Price and Quantity headers to match the assignment requirements
+    th = document.createElement('th');
+    th.textContent = 'Price';
+    tr.appendChild(th);
+
+    th = document.createElement('th');
+    th.textContent = 'Quantity';
+    tr.appendChild(th);
+
     thead.appendChild(tr);
     table.appendChild(thead);
 }
@@ -123,9 +153,26 @@ function make_row(i, tbody) {
     td = make_frosting_cell(i);
     tr.appendChild(td);
 
-    /*
-     * STUDENTS SHOULD ADD CODE HERE FOR THE PRICE AND QUANTITY CELLS FOR PART 1 OF THE ASSIGNMENT
-     */
+    // Creating the price cell and format the number to two decimal places
+    td = document.createElement('td');
+    td.textContent = '$' + cupcake_data[i].price.toFixed(2);
+    tr.appendChild(td);
+
+    // Creating the quantity cell using a select dropdown instead of an input
+    td = document.createElement('td');
+    const select = document.createElement('select');
+    select.id = 'quantity' + i;
+
+    // Building the dropdown options 0-5 as shown in the demo
+    for (let q = 0; q <= 5; q++) {
+        const option = document.createElement('option');
+        option.value = q;
+        option.textContent = q;
+        select.appendChild(option);
+    }
+
+    td.appendChild(select);
+    tr.appendChild(td);
 
     tbody.appendChild(tr);
 }
