@@ -15,20 +15,50 @@ function frosting_clear(i) {
 
 function purchase() {
     let subtotal = 0;
+    let errorFound = false;
+    let errorId = '';
 
-    // Looping through all cupcakes to calculate the subtotal
+    // looping to check inputs and calculate subtotal
     for (let i = 0; i < cupcake_data.length; i++) {
         const qty = parseInt(document.getElementById('quantity' + i).value);
+        const frosting = document.getElementById('frosting' + i).value;
 
+        // clearing red outlines
         frosting_clear(i);
 
-        //Only add to subtotal if quantity is greater than 0
         if (qty > 0) {
-            subtotal += qty * cupcake_data[i].price;
+            // checking if frosting is selected
+            if (frosting === '') {
+                frosting_error(i);
+
+                // capturing the ID of the first error found
+                if (!errorFound) {
+                    errorId = cupcake_data[i].id;
+                }
+
+                errorFound = true;
+            } else {
+                subtotal += qty * cupcake_data[i].price;
+            }
         }
     }
 
-    //Calculating Tax and Final Total
+    // stopping once error is found and display red message with ID
+    if (errorFound) {
+        const message_elem = document.getElementById('message');
+        message_elem.textContent =
+            'Select a frosting type for cupcake id ' + errorId;
+        message_elem.style.color = 'red';
+        return;
+    }
+
+    // resetting message color and text if no error
+    const message_elem = document.getElementById('message');
+    message_elem.textContent =
+        'Select quantity and frosting for the cupcakes you would like to purchase';
+    message_elem.style.color = 'black';
+
+    // calculating tax and final total
     const tax = subtotal * tax_percentage;
     const finalTotal = subtotal + tax;
 
@@ -38,9 +68,6 @@ function purchase() {
     document.getElementById('tax').textContent = `Tax: $${tax.toFixed(2)}`;
     document.getElementById('total_with_tax').textContent =
         `Total with Tax: $${finalTotal.toFixed(2)}`;
-
-    document.getElementById('message').textContent =
-        'Select quantity and frosting for the cupcakes you would like to purchase';
 }
 
 function make_header(table) {
